@@ -241,7 +241,13 @@ let aktif=null, mode='dwell';
 
 const bgm=new Audio(); let vol=.5, ducking=false, duckId=0, laguOn=true;
 bgm.loop=true; bgm.volume=vol;
-bgm.onerror=()=>status('File lagu tidak ditemukan. Pastikan folder static/ ada dan enableStaticServing = true.');
+bgm.onerror = () => {
+  status('GAGAL MEMUAT LAGU: ' + bgm.src);
+};
+
+bgm.oncanplay = () => {
+  status('File lagu berhasil dimuat. Silakan dengarkan musiknya.');
+};
 function setVol(){bgm.volume=Math.min(1,Math.max(0,ducking?vol*.3:vol));}
 function putar(n){
   if(!laguOn)return;
