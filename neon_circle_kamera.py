@@ -262,8 +262,15 @@ async function tesAudio() {
   }
 }
 function toggleLagu(){
-  laguOn=!laguOn; $('bgmBtn').textContent=laguOn?'🎵 Lagu: Hidup':'🎵 Lagu: Mati';
-  if(laguOn)putar(aktif); else bgm.pause();
+  if (bgm.paused) {
+    laguOn = true;
+    $('bgmBtn').textContent = '🎵 Lagu: Hidup';
+    putar(aktif);
+  } else {
+    laguOn = false;
+    $('bgmBtn').textContent = '🎵 Lagu: Mati';
+    bgm.pause();
+  }
 }
 function ubahVol(v){vol=Math.min(1,Math.max(0,vol+(v==='up'?.1:-.1)));setVol();status('Volume musik: '+Math.round(vol*100)+'%');}
 let suara=true;
