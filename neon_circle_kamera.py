@@ -248,6 +248,19 @@ function putar(n){
   bgm.src=DATA[n].url;
   bgm.play().catch(()=>status('Lagu belum bisa diputar. Klik sekali dengan mouse dulu.'));
 }
+async function tesAudio() {
+  const url = DATA["Jari-jari"].url;
+
+  try {
+    const response = await fetch(url);
+    status(
+      "Tes audio: HTTP " + response.status +
+      " | Tipe: " + response.headers.get("content-type")
+    );
+  } catch (e) {
+    status("Tes audio gagal: " + e.message);
+  }
+}
 function toggleLagu(){
   laguOn=!laguOn; $('bgmBtn').textContent=laguOn?'🎵 Lagu: Hidup':'🎵 Lagu: Mati';
   if(laguOn)putar(aktif); else bgm.pause();
